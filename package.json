@@ -1,7 +1,8 @@
 {
   "name": "import-documentation",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
+  "bin": "dist/bin/import-documentation.js",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
@@ -21,27 +22,32 @@
   },
   "homepage": "https://github.com/hexlet-boilerplates/javascript-package#readme",
   "dependencies": {
-    "documentation": "*",
+    "babel-polyfill": "*",
+    "commander": "*",
+    "documentation": "^4.0.0-beta11",
     "esprima": "*",
-    "babel-polyfill": "*"
+    "get-installed-path": "*"
   },
   "devDependencies": {
-    "jest": "*",
-    "hexlet-pairs": "*",
-    "mocha": "*",
     "babel-cli": "*",
     "babel-core": "*",
-    "babel-preset-latest": "*",
-    "babel-preset-stage-0": "*",
-    "eslint": "*",
     "babel-eslint": "*",
     "babel-plugin-syntax-flow": "*",
     "babel-plugin-transform-flow-strip-types": "*",
+    "babel-preset-latest": "*",
+    "babel-preset-stage-0": "*",
+    "eslint": "*",
     "eslint-config-airbnb": "*",
+    "eslint-plugin-flowtype": "*",
     "eslint-plugin-import": "^1.8.0",
-    "eslint-plugin-flowtype": "*"
+    "hexlet-pairs": "*",
+    "jest": "*",
+    "mocha": "*"
   },
   "jest": {
-    "testPathIgnorePatterns": ["__tests__/fixtures", "node_modules"]
+    "testPathIgnorePatterns": [
+      "__tests__/fixtures",
+      "node_modules"
+    ]
   }
 }

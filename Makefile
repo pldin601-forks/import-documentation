@@ -1,9 +1,6 @@
 install:
 	yarn
 
-lock:
-	npm shrinkwrap
-
 build:
 	rm -rf dist
 	npm run build
