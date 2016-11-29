@@ -38,7 +38,14 @@ export const generate = files => {
     const packagePath = getInstalledPath(packageName);
     const allPackageDocs = documentation.buildSync([path.resolve(packagePath, 'src', 'index.js')]);
     const functions = [...packages[packageName]];
-    const packageDocs = functions.map(func => allPackageDocs.find(item => item.name === func));
+    const packageDocsAll = functions.map(func => {
+      const docs = allPackageDocs.find(item => item.name === func);
+      if (docs === undefined) {
+        console.warn(`Documentation for function "${func}" not found!`);
+      }
+      return docs;
+    });
+    const packageDocs = packageDocsAll.filter(obj => obj !== undefined);
     return { packageName, packageDocs };
   });
 };
