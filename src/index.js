@@ -36,7 +36,8 @@ export const generate = files => {
 
   return Object.keys(packages).map(packageName => {
     const packagePath = getInstalledPath.sync(packageName);
-    const allPackageDocs = documentation.buildSync([path.resolve(packagePath, 'src', 'index.js')]);
+    const resolvedPath = path.resolve(packagePath, 'src', 'index.js');
+    const allPackageDocs = documentation.buildSync([resolvedPath]);
     const functions = [...packages[packageName]];
     const packageDocsAll = functions.map(func => {
       const docs = allPackageDocs.find(item => item.name === func);

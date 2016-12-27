@@ -24,7 +24,7 @@
   "dependencies": {
     "babel-polyfill": "*",
     "commander": "*",
-    "documentation": "^4.0.0-beta11",
+    "documentation": "^4.0.0-beta.17",
     "esprima": "*",
     "get-installed-path": "*"
   },
