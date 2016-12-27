@@ -10,8 +10,14 @@ import documentation from 'documentation';
 
 const getLocalName = specifier => {
   const map = {
-    ImportDefaultSpecifier: (s) => s.local.name,
-    ImportSpecifier: (s) => s.imported.name,
+    ImportDefaultSpecifier: (s) => { return {
+      'importType': 'importDefault', 
+      'importName': s.local.name } 
+    },
+    ImportSpecifier: (s) => { return { 
+      'importType': 'import', 
+      'importName': s.imported.name 
+    } },
   };
 
   return map[specifier.type](specifier);
@@ -38,11 +44,15 @@ export const generate = files => {
     const packagePath = getInstalledPath.sync(packageName);
     const resolvedPath = path.resolve(packagePath, 'src', 'index.js');
     const allPackageDocs = documentation.buildSync([resolvedPath]);
+    console.log(allPackageDocs);
     const functions = [...packages[packageName]];
-    const packageDocsAll = functions.map(func => {
-      const docs = allPackageDocs.find(item => item.name === func);
+    const packageDocsAll = functions.map(({ importType, importName }) => {
+      const docs = allPackageDocs.find(item => 
+          importType === 'importDefault' 
+            ? (item.name === importName || item.name === 'index') 
+            : item.name === importName);
       if (docs === undefined) {
-        console.warn(`Documentation for function "${func}" not found!`);
+        console.warn(`Documentation for function "${importName}" not found!`);
       }
       return docs;
     });
