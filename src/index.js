@@ -52,11 +52,16 @@ export const generate = files => {
 };
 
 export const write = (dir, docs) => {
-  docs.forEach(({ packageName, packageDocs }) =>
+  docs.forEach(({ packageName, packageDocs }) => {
+    if (packageDocs.length == 0) {
+      console.warn(`Package "${packageName}" has not documented!`);
+      return;
+    }
     documentation.formats.md(packageDocs, {}, (err, res) => {
       if (err) {
         throw err;
       }
       fs.writeFileSync(path.resolve(dir, `${packageName}.md`), res);
-    }));
+    });
+  });
 };
